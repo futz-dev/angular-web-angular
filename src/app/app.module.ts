@@ -31,8 +31,7 @@ export type SocialLoginProvider = {
 
 const loginProviders = (): SocialLoginProvider[] => {
   const providers: SocialLoginProvider[] = [];
-  console.log('!!!! environment', JSON.stringify(environment)); // TODO Test this
-  if (environment['envVars'].hasOwnProperty('GOOGLE_CLIENT_ID')) {
+  if (environment.envVars['GOOGLE_CLIENT_ID']) {
     providers.push({
       id: GoogleLoginProvider.PROVIDER_ID,
       provider: new GoogleLoginProvider(environment.envVars['GOOGLE_CLIENT_ID']),
