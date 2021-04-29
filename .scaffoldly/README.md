@@ -19,7 +19,9 @@ For more info: https://docs.scaffold.ly/infrastructure/configuration-files
 ## Stage URLs
 
 ```yaml
-{}
+"sly-auth-api":
+  "live": "https://sly.futz.dev/auth"
+  "nonlive": "https://sly-dev.futz.dev/auth"
 
 ```
 
