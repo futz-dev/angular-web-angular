@@ -6,7 +6,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger } from '../logger.service';
 import CoreError from '../core-error';
-import { AuthenticationService } from '@app/@shared/service/authentication.service';
+import { AuthenticationService, refreshHeader } from '@app/@shared/service/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -46,7 +46,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       return this.toastThrowError(response, new CoreError('Request error', response));
     }
 
-    if (status === 403 && request.headers.get('X-Auth-Refresh')) {
+    if (status === 403 && request.headers.has(refreshHeader)) {
       return this.authenticationService.logout().pipe(() => {
         this.router.navigate(['/login'], { replaceUrl: true });
         return this.toastThrowError(response, new CoreError('Token refresh error', response));
