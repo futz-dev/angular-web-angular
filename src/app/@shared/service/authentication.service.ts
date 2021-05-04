@@ -99,7 +99,7 @@ export class AuthenticationService {
       return this.setLoginResponse();
     }
 
-    return this.httpClient.post(refreshUrl, {}, { withCredentials: true }).pipe(
+    return this.httpClient.post(refreshUrl, {}, { withCredentials: true, headers: { 'X-Auth-Refresh': 'true' } }).pipe(
       mergeMap((body: LoginResponse) => {
         return this.setLoginResponse(body, true);
       })

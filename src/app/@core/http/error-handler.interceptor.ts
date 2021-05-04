@@ -42,8 +42,15 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     const errorResponse = response as HttpErrorResponse;
     const { status } = errorResponse;
 
-    if (status !== 401) {
+    if (status !== 403) {
       return this.toastThrowError(response, new CoreError('Request error', response));
+    }
+
+    if (status === 403 && request.headers.get('X-Auth-Refresh')) {
+      return this.authenticationService.logout().pipe(() => {
+        this.router.navigate(['/login'], { replaceUrl: true });
+        return this.toastThrowError(response, new CoreError('Token refresh error', response));
+      });
     }
 
     return this.authenticationService.refresh().pipe(
@@ -54,12 +61,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           }),
           next
         );
-      }),
-      catchError((error) => {
-        return this.authenticationService.logout().pipe(() => {
-          this.router.navigate(['/login'], { replaceUrl: true });
-          return this.toastThrowError(response, new CoreError('Token refresh error', error));
-        });
       })
     );
   }
