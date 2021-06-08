@@ -12,11 +12,13 @@
     "e2e": "yarn prepare && ng e2e",
     "translations:extract": "ngx-translate-extract --input ./src --output ./src/translations/template.json --format=json --clean --sort",
     "docs": "hads ./docs -o",
-    "prepare": "dotenv -e .scaffoldly/.env -c $NODE_ENV -- ngx-scripts env npm_package_version service_urls env_vars --parse-json",
+    "prepare": "yarn dotenv && yarn openapi",
     "prettier": "prettier --write \"./{src,e2e}/**/*.{ts,js,html,scss}\"",
     "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,html,scss}\"",
     "postinstall": "yarn prettier -s",
-    "generate": "ng generate"
+    "generate": "ng generate",
+    "dotenv": "dotenv -e .scaffoldly/.env -c $NODE_ENV -- ngx-scripts env npm_package_version service_urls env_vars --parse-json",
+    "openapi": "echo TODO"
   },
   "dependencies": {
     "@angular/animations": "^10.1.4",
