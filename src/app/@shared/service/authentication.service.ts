@@ -3,8 +3,6 @@ import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 
 import { map, mergeMap } from 'rxjs/operators';
-import { environment } from '@env/environment';
-import { HttpClient } from '@angular/common/http';
 import { Email } from '../email-login/email-login.component';
 import CoreError from '@app/@core/core-error';
 import { JwtPayload, JwtService, Provider, TokenResponse } from '@app/@openapi/auth';
@@ -19,13 +17,7 @@ export class AuthenticationService {
   private tokenResponse: TokenResponse;
   public readonly tokenResponse$: BehaviorSubject<TokenResponse> = new BehaviorSubject(null);
 
-  private baseUrl = environment.serviceUrls['sly-auth-api'];
-
-  constructor(
-    private httpClient: HttpClient,
-    private socialAuthService: SocialAuthService,
-    private jwtService: JwtService
-  ) {
+  constructor(private socialAuthService: SocialAuthService, private jwtService: JwtService) {
     this.tokenResponse$.subscribe((tokenResponse) => {
       this.tokenResponse = tokenResponse;
     });
