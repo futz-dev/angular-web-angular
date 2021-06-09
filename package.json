@@ -55,7 +55,7 @@
     "@biesbjerg/ngx-translate-extract": "^7.0.3",
     "@biesbjerg/ngx-translate-extract-marker": "^1.0.0",
     "@ngx-rocket/scripts": "^5.1.0",
-    "@scaffoldly/openapi-generator": "^1.0.9",
+    "@scaffoldly/openapi-generator": "^1.0.10",
     "@types/jasmine": "^3.5.14",
     "@types/jasminewd2": "^2.0.8",
     "@types/jest": "^26.0.12",
