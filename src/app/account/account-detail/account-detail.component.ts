@@ -22,7 +22,9 @@ export class AccountDetailComponent implements OnInit {
       .pipe(
         map((providers) => {
           return Object.entries(providers).reduce((acc, [key, value]) => {
-            acc[key] = value;
+            if (value.clientId) {
+              acc[key] = value;
+            }
             return acc;
           }, {} as Logins);
         })
