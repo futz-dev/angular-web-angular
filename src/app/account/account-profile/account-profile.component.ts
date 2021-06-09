@@ -3,9 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountResponse } from '@app/@openapi/auth';
 import { AuthenticationService } from '@app/@shared/service/authentication.service';
 import { CurrentAccountService } from '@app/@shared/service/current-account.service';
-import { SocialAuthService } from 'angularx-social-login';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-profile',
@@ -22,6 +19,10 @@ export class AccountProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentAccountService.get().subscribe((account) => {
+      if (!account) {
+        return;
+      }
+
       const { name, email, company } = account;
       this.formGroup = new FormGroup({
         name: new FormControl(name, [Validators.required, Validators.minLength(3)]),
