@@ -41,9 +41,9 @@ export class AccountComponent implements OnInit {
     this.currentAccountService.get().subscribe((account: AccountResponse) => {
       if (account) {
         this.id = account.id;
-        this.name = account.detail.name;
-        this.email = account.detail.email;
-        this.company = account.detail.company;
+        this.name = account.name;
+        this.email = account.email;
+        this.company = account.company;
       }
     });
   }

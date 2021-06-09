@@ -29,9 +29,9 @@ export class HeaderComponent implements OnInit {
       (account: AccountResponse) => {
         if (account) {
           this.account = account;
-          this.email = account.detail.email;
-          this.name = account.detail.name;
-          this.company = account.detail.company;
+          this.email = account.email;
+          this.name = account.name;
+          this.company = account.company;
         } else {
           this.account = null;
           this.email = null;

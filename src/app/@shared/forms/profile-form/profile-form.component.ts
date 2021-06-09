@@ -39,7 +39,7 @@ export class ProfileFormComponent implements OnInit {
     if (this.mode === 'update') {
       this.currentAccountService.get().subscribe((account) => {
         if (account) {
-          const { name, email, company } = account.detail;
+          const { name, email, company } = account;
           this.formGroup.get('name').setValue(name);
           this.formGroup.get('email').setValue(email);
           this.formGroup.get('company').setValue(company);
@@ -78,7 +78,7 @@ export class ProfileFormComponent implements OnInit {
           company: this.formGroup.get('company').dirty ? this.formGroup.get('company').value : undefined,
         })
         .subscribe((account) => {
-          const { name, email, company } = account.detail;
+          const { name, email, company } = account;
           this.formGroup.get('name').setValue(name);
           this.formGroup.get('email').setValue(email);
           this.formGroup.get('company').setValue(company);

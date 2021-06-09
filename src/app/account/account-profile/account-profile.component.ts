@@ -22,7 +22,7 @@ export class AccountProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentAccountService.get().subscribe((account) => {
-      const { name, email, company } = account.detail;
+      const { name, email, company } = account;
       this.formGroup = new FormGroup({
         name: new FormControl(name, [Validators.required, Validators.minLength(3)]),
         email: new FormControl(email, [Validators.required, Validators.email]),
