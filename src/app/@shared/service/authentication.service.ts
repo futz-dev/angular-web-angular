@@ -63,6 +63,7 @@ export class AuthenticationService {
           switch (provider) {
             case 'GOOGLE':
               return this.jwtService.googleLogin({
+                provider: 'GOOGLE',
                 id: socialUser.id,
                 authToken: socialUser.authToken,
                 idToken: socialUser.idToken,
@@ -80,7 +81,7 @@ export class AuthenticationService {
 
   emailLogin(email: Email, code?: string): Observable<TokenResponse> {
     return this.jwtService
-      .emailLogin({ email, code })
+      .emailLogin({ provider: 'EMAIL', email, code })
       .pipe(mergeMap((tokenResponse) => this.setTokenResponse(tokenResponse, code ? true : false)));
   }
 
@@ -96,7 +97,7 @@ export class AuthenticationService {
       return this.setTokenResponse();
     }
 
-    return this.jwtService.refresh().pipe(mergeMap((tokenResponse) => this.setTokenResponse(tokenResponse)));
+    return this.jwtService.refresh(this.token).pipe(mergeMap((tokenResponse) => this.setTokenResponse(tokenResponse)));
   }
 
   logout(): Observable<boolean> {

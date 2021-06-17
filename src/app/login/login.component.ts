@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (loginResponse && !loginResponse.verified) {
           this.loading = false;
           this.email = email;
-          this.verificationMethod = loginResponse.verificationMethod;
+          this.verificationMethod = loginResponse.verificationMethod as VerificationMethod;
           this.error = null;
         }
       },
