@@ -17,8 +17,7 @@ const log = new Logger('Login');
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  version: string | null = environment.version;
-  appName: string = environment.envVars['APPLICATION_FRIENDLY_NAME'];
+  appName: string = environment.APPLICATION_FRIENDLY_NAME;
   error: string | undefined;
   loading = true;
   providers: ProviderResponse;
