@@ -53,12 +53,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   googleLogin() {
     this.loading = true;
-    this.authenticationService
+    const subscription = this.authenticationService
       .socialLogin('GOOGLE')
       .pipe(mergeMap((loginResponse) => this.accountService.getAccountById(loginResponse.id)))
       .subscribe(
         (account) => {
           log.debug(`${account.id} successfully logged in`);
+          subscription.unsubscribe();
           this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
         },
         (error: CoreError) => {
@@ -93,12 +94,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   verifyCode(code: string) {
     this.loading = true;
-    this.authenticationService
+    const subscription = this.authenticationService
       .emailLogin(this.email, code)
       .pipe(mergeMap(() => this.accountService.getMyAccount()))
       .subscribe(
         (account) => {
           log.debug(`${account.id} successfully logged in`);
+          subscription.unsubscribe();
           this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
         },
         (error: CoreError) => {
