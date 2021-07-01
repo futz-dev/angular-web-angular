@@ -1,6 +1,6 @@
 {
   "name": "angular",
-  "version": "1.15.1-2",
+  "version": "1.15.1",
   "scripts": {
     "ng": "ng",
     "build": "yarn prepare && ng build --prod",
