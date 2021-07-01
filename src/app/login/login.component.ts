@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(
         (account) => {
           log.debug(`${account.id} successfully logged in`);
-          subscription.unsubscribe();
           this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
         },
         (error: CoreError) => {
@@ -70,6 +69,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
           this.loading = false;
           this.error = error.message;
+        },
+        () => {
+          subscription.unsubscribe();
         }
       );
   }
@@ -100,7 +102,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(
         (account) => {
           log.debug(`${account.id} successfully logged in`);
-          subscription.unsubscribe();
           this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
         },
         (error: CoreError) => {
@@ -112,6 +113,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.email = null;
           this.error = error.message;
+        },
+        () => {
+          subscription.unsubscribe();
         }
       );
   }
