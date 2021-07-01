@@ -18,6 +18,8 @@ export class AuthenticationService {
   public readonly tokenResponse$: BehaviorSubject<TokenResponse> = new BehaviorSubject(null);
 
   constructor(private socialAuthService: SocialAuthService, private jwtService: JwtService) {
+    this.jwtService.configuration.withCredentials = true;
+
     this.tokenResponse$.subscribe((tokenResponse) => {
       this.tokenResponse = tokenResponse;
     });
@@ -97,10 +99,8 @@ export class AuthenticationService {
       return this.setTokenResponse();
     }
 
-    this.jwtService.configuration.withCredentials = true;
     return this.jwtService.refresh(this.token).pipe(
       mergeMap((tokenResponse) => {
-        this.jwtService.configuration.withCredentials = true;
         return this.setTokenResponse(tokenResponse);
       })
     );
